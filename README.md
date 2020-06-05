@@ -1,5 +1,5 @@
 # UnitConverterJetBrains
-This is a UnitConverter for JetBrains Academy
+This is UnitConverter Project for JetBrains Academy
 
 https://hyperskill.org/projects/70
 

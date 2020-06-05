@@ -1,29 +1,31 @@
-package com.example
 
 enum class Operating {;
 
     companion object {
         var status = "running"
         var placeholderUnit = UnitMeasurements
-        fun isNumeric(string: String): Boolean {
+        fun isN(string: String): Boolean {//  check if input is Number
             return string.matches("-?\\d+(\\.\\d+)?".toRegex())
+        }
+        fun isD(string: String): Boolean {//  check if input contains "degree"
+            return string.contains("degree")
         }
 
         fun run(command: String) {
             val line = command.toLowerCase().split(" ")
-            var lineLength = 0
-            for (i in 0..line.lastIndex) { lineLength++ }
+            var ll = 0 // Line Length
+            for (i in 0..line.lastIndex) { ll++ }
             if (line[0] == "exit") { status = "exit"; return }
             if (line[0] == "help") {
                 placeholderUnit.helpMenu("help")
             } else if (line[0] == "f1") {
                 placeholderUnit.helpMenu("f1")
-            } else if (isNumeric(line[0]) && lineLength == 4 && !isNumeric(line[1]) && !isNumeric(line[2]) && !isNumeric(line[3])) {
+            } else if (isN(line[0]) && ll == 4 && !isN(line[1]) && !isN(line[2]) && !isN(line[3])) {
                 UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[1]), UnitMeasurements.getMeasureName(line[3]))
-            } else if (isNumeric(line[0]) && lineLength == 5 && !isNumeric(line[1]) && !isNumeric(line[2]) && !isNumeric(line[3]) && !isNumeric(line[4])) {
-                if (line[1].contains("degree")) UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[2]), UnitMeasurements.getMeasureName(line[4]))
-                if (line[3].contains("degree")) UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[1]), UnitMeasurements.getMeasureName(line[4]))
-            } else if (isNumeric(line[0]) && lineLength == 6 && !isNumeric(line[1]) && !isNumeric(line[2]) && !isNumeric(line[3]) && !isNumeric(line[4]) && !isNumeric(line[5]) && line[1].contains("degree") && line[4].contains("degree")) {
+            } else if (isN(line[0]) && ll == 5 && !isN(line[1]) && !isN(line[2]) && !isN(line[3]) && !isN(line[4])) {
+                if (isD(line[1])) UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[2]), UnitMeasurements.getMeasureName(line[4]))
+                if (isD(line[3])) UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[1]), UnitMeasurements.getMeasureName(line[4]))
+            } else if (isN(line[0]) && ll == 6 && !isN(line[1]) && !isN(line[2]) && !isN(line[3]) && !isN(line[4]) && !isN(line[5]) && isD(line[1]) && isD(line[4])) {
                 UnitMeasurements.convert(line[0].toDouble(), UnitMeasurements.getMeasureName(line[2]), UnitMeasurements.getMeasureName(line[5]))
             } else println("Parse error")
         }

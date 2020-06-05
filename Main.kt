@@ -13,10 +13,10 @@ enum class Operating {;
             var lineLength = 0
             for (i in 0..line.lastIndex) { lineLength++ }
             if (line[0] == "exit") { status = "exit"; return }
-            if (line[0] == "help!") {
-                placeholderUnit.helpMenu("help!")
-            } else if (line[0] == "f1!") {
-                placeholderUnit.helpMenu("f1!")
+            if (line[0] == "help") {
+                placeholderUnit.helpMenu("help")
+            } else if (line[0] == "f1") {
+                placeholderUnit.helpMenu("f1")
             } else if (isNumeric(line[0]) && lineLength == 4) {
                 val line1to3NotNumb = isNumeric(line[0]) && !isNumeric(line[1]) && !isNumeric(line[2]) && !isNumeric(line[3])
                 val pharserFour: Boolean = lineLength == 4 && line1to3NotNumb// && (UnitMeasurements.getMeasureName(line[1]) != UnitMeasurements.ERROR || UnitMeasurements.getMeasureName(line[3]) != UnitMeasurements.ERROR)
@@ -86,7 +86,7 @@ enum class Operating {;
                 } else println("Conversion from ${startMeasure.names[2]} to ${resultMeasure.names[2]} is impossible")
             }
             fun helpMenu(line: String) {       /// help menu
-                if (line == "help!") {
+                if (line == "help") {
                     println("Hello! This is my uber unit converter. U can convert:\n" +
                             "Temperature        >   Fahrenheit into Celsius or Kelvins and vice versa.\n" +
                             "Length             >   Meter into Yards, Feet, Inches and vice versa.\n" +
@@ -97,7 +97,7 @@ enum class Operating {;
                             "U cant convert grams into meters though, so beware!\n" +
                             "Type   'F1'    for all possible units available to measure.\n")
                 }
-                if (line == "f1!") {
+                if (line == "f1") {
                     println("All commands can be Capital, LowerCase or CamelCase, it doesn't matter.")
                     for (enum in values()) {
                         println("For ${enum.name.toLowerCase().capitalize()} - possible commands are:  >>  ${enum.names.joinToString()}")
